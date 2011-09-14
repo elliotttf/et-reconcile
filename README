@@ -1,0 +1,2 @@
+run this script as follows from a valid Drupal root:
+  drush php-script path/to/ec-reconcile/ec-reconcile.php
