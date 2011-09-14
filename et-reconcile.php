@@ -5,11 +5,13 @@
  * Script to collect Drupal IDs that are missing in ExactTarget.
  */
 
-function parse_file($file) {
-  $in = fopen('in/' . $file, 'r');
-  $out = fopen('out/' . $file, 'w');
-  $err = fopen('err/' . $file, 'w');
+function parse_file($work_dir, $file) {
+  $in = fopen($work_dir . '/in/' . $file, 'r');
+  $out = fopen($work_dir . '/out/' . $file, 'w');
+  $err = fopen($work_dir . '/err/' . $file, 'w');
   fputcsv($err, array('row', 'message'));
+
+  drush_log('Finding uids for ' . $file);
 
   $count = 1;
   while ($row = fgetcsv($in)) {
@@ -54,10 +56,13 @@ function parse_file($file) {
   fclose($in);
   fclose($out);
   fclose($err);
+
+  drush_log('Finished finding uids for ' . $file);
 }
 
-$in = glob('in/*.csv');
+$work_dir = dirname(__FILE__);
+$in = glob($work_dir . '/in/*.csv');
 foreach ($in as $in_file) {
-  parse_file(basename($in_file));
+  parse_file($work_dir, basename($in_file));
 }
 
