@@ -1,0 +1,3 @@
+in/*.csv
+out/*.csv
+err/*.csv
