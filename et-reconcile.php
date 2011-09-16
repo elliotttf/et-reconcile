@@ -26,7 +26,7 @@ function parse_file($work_dir, $file) {
         $uid = $account->uid;
       }
       else {
-        $uid .= '|' . $uid;
+        $uid .= '|' . $account->uid;
       }
       $res_count++;
     }
